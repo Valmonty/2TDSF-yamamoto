@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
 public class Motorista {
 
 	@Id
-	@GeneratedValue(generator = "motorista", strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(generator = "motorista")
 	@Column(name = "nr_carteira")
 	private int numeroCarteira;
 
