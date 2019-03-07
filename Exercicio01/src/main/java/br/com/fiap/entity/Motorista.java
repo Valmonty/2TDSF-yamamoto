@@ -4,10 +4,7 @@ import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
@@ -37,14 +34,13 @@ public class Motorista {
 	private byte[] fotoCarteira;
 
 	@Column(name = "ds_genero")
-	@Enumerated(EnumType.STRING)
-	private Genero genero;
+	private String genero;
 
 	public Motorista() {
 		super();
 	}
 
-	public Motorista(String nome, Calendar dataNascimento, byte[] fotoCarteira, Genero genero) {
+	public Motorista(String nome, Calendar dataNascimento, byte[] fotoCarteira, String genero) {
 		super();
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
@@ -52,7 +48,7 @@ public class Motorista {
 		this.genero = genero;
 	}
 
-	public Motorista(int numeroCarteira, String nome, Calendar dataNascimento, byte[] fotoCarteira, Genero genero) {
+	public Motorista(int numeroCarteira, String nome, Calendar dataNascimento, byte[] fotoCarteira, String genero) {
 		super();
 		this.numeroCarteira = numeroCarteira;
 		this.nome = nome;
@@ -93,11 +89,11 @@ public class Motorista {
 		this.fotoCarteira = fotoCarteira;
 	}
 
-	public Genero getGenero() {
+	public String getGenero() {
 		return genero;
 	}
 
-	public void setGenero(Genero genero) {
+	public void setGenero(String genero) {
 		this.genero = genero;
 	}
 
