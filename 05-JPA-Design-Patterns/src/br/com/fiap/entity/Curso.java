@@ -32,7 +32,7 @@ public class Curso {
 	@Column(name = "nm_curso", length = 15, nullable = false)
 	private String nome;
 
-	@Column(name = "dt_lancament", nullable = false)
+	@Column(name = "dt_lancamento", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Calendar dataLancamento;
 
