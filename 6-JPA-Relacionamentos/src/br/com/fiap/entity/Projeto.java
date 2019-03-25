@@ -1,6 +1,7 @@
 package br.com.fiap.entity;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -38,9 +40,44 @@ public class Projeto {
 	@Column(name = "dt_fim")
 	@Temporal(TemporalType.DATE)
 	private Calendar dataFim;
+	
+	@ManyToMany(mappedBy = "projetos")
+	private List<Funcionario> funcionarios;
 
 	public int getCodigo() {
 		return codigo;
+	}
+
+	public Projeto(String nome, Status status, Calendar dataInicio, Calendar dataFim) {
+		super();
+		this.nome = nome;
+		this.status = status;
+		this.dataInicio = dataInicio;
+		this.dataFim = dataFim;
+	}
+
+	public Projeto(String nome, Status status, Calendar dataInicio, Calendar dataFim, List<Funcionario> funcionarios) {
+		super();
+		this.nome = nome;
+		this.status = status;
+		this.dataInicio = dataInicio;
+		this.dataFim = dataFim;
+		this.funcionarios = funcionarios;
+	}
+
+	public Projeto() {
+		super();
+	}
+
+	public Projeto(int codigo, String nome, Status status, Calendar dataInicio, Calendar dataFim,
+			List<Funcionario> funcionarios) {
+		super();
+		this.codigo = codigo;
+		this.nome = nome;
+		this.status = status;
+		this.dataInicio = dataInicio;
+		this.dataFim = dataFim;
+		this.funcionarios = funcionarios;
 	}
 
 	public void setCodigo(int codigo) {
@@ -77,6 +114,14 @@ public class Projeto {
 
 	public void setDataFim(Calendar dataFim) {
 		this.dataFim = dataFim;
+	}
+
+	public List<Funcionario> getFuncionarios() {
+		return funcionarios;
+	}
+
+	public void setFuncionarios(List<Funcionario> funcionarios) {
+		this.funcionarios = funcionarios;
 	}
 
 }
