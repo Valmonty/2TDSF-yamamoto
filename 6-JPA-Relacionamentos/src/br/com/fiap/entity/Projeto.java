@@ -41,7 +41,7 @@ public class Projeto {
 	@Temporal(TemporalType.DATE)
 	private Calendar dataFim;
 	
-	@ManyToMany(mappedBy = "projetos")
+	@ManyToMany(mappedBy = "projeto")
 	private List<Funcionario> funcionarios;
 
 	public int getCodigo() {
