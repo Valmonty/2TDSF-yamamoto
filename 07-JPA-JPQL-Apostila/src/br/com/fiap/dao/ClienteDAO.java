@@ -4,10 +4,13 @@ import java.util.List;
 
 import br.com.fiap.entity.Cliente;
 
-public interface ClienteDAO extends GenericDAO<Cliente,Integer>{
+public interface ClienteDAO extends GenericDAO<Cliente, Integer> {
 
 	List<Cliente> pesquisar();
-	
-	List<Cliente> pesquisarPorParteNome(String nome);
-	
+
+	List<Cliente> pesquisar(String nome);
+
+	List<Cliente> pesquisarPorEstado(String estado);
+
+	List<Cliente> pesquisarPorDiaReserva(int dias);
 }

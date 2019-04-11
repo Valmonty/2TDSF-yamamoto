@@ -21,10 +21,21 @@ public class ClienteDAOImpl extends GenericDAOImpl<Cliente, Integer> implements 
 	}
 
 	@Override
-	public List<Cliente> pesquisarPorParteNome(String nome) {
-		TypedQuery<Cliente> query = em.createQuery("from Cliente c where c.nome = :n", Cliente.class);
-		query.setParameter("n", nome);
-		return query.getResultList();
+	public List<Cliente> pesquisar(String nome) {
+		return em.createQuery("from Cliente c where c.nome like :n", Cliente.class).setParameter("n", "%" + nome + "%")
+				.getResultList();
+	}
+
+	@Override
+	public List<Cliente> pesquisarPorEstado(String estado) {
+		return em.createQuery("from Cliente c where c.endereco.cidade.uf", Cliente.class).setParameter("P", estado)
+				.getResultList();
+	}
+
+	@Override
+	public List<Cliente> pesquisarPorDiaReserva(int dias) {
+		return em.createQuery("select r.cliente from Reserva r where r.numeroDias = :d", Cliente.class)
+				.setParameter("d", dias).getResultList();
 	}
 
 }
