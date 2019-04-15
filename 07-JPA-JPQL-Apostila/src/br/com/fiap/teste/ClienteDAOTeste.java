@@ -3,6 +3,7 @@ package br.com.fiap.teste;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -48,11 +49,35 @@ class ClienteDAOTeste {
 			assertEquals("BA", cliente.getEndereco().getCidade().getUf());
 		}
 	}
-	
+
 	@Test
 	void pesquisarPorDiasReserva() {
 		List<Cliente> lista = dao.pesquisarPorDiaReserva(10);
-		assertEquals(4, lista.size());
+		assertEquals(2, lista.size());
+	}
+
+	@Test
+	void pesquisarPorNomeCidadeTeste() {
+		List<Cliente> lista = dao.buscar("Lea", "Lon");
+
+		for (Cliente cliente : lista) {
+			assertTrue(
+					cliente.getNome().contains("Lea") && cliente.getEndereco().getCidade().getNome().contains("Lon"));
+		}
+	}
+
+	@Test
+	void pesquisarPorEstados() {
+		List<String> estados = new ArrayList<String>();
+
+		estados.add("SP");
+		estados.add("BA");
+
+		List<Cliente> lista = dao.buscarPorEstados(estados);
+
+		for (Cliente cliente : lista) {
+			assertTrue(estados.contains(cliente.getEndereco().getCidade().getUf()));
+		}
 	}
 
 }
