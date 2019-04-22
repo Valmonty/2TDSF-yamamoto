@@ -12,4 +12,8 @@ public interface PacoteDAO extends GenericDAO<Pacote, Integer> {
 
 	List<Pacote> buscarPorDatas(Calendar inicio, Calendar fim);
 
+	double somarPrecoPorTransporte(Transporte transporte);
+
+	List<Pacote> buscarPorPreco(double preco);
+
 }

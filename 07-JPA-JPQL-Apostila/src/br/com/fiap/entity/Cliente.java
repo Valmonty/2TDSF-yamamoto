@@ -10,33 +10,41 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+@NamedQueries({
+		@NamedQuery(name = "Cliente.porNome", query = "select c from Cliente c where upper(c.nome) like upper(:n) order by c.nome"),
+		@NamedQuery(name = "Cliente.porCpf", query = "select c from Cliente c where c.cpf = :c") 
+		
+})
+
 @Entity
-@SequenceGenerator(name="seqCliente", sequenceName="SEQ_CLIENTE", allocationSize=1)
+@SequenceGenerator(name = "seqCliente", sequenceName = "SEQ_CLIENTE", allocationSize = 1)
 public class Cliente {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seqCliente")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqCliente")
 	private int id;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String nome;
-	
-	@Column(length=11,nullable=false)
+
+	@Column(length = 11, nullable = false)
 	private String cpf;
-	
+
 	@Temporal(TemporalType.DATE)
-	@Column(name="DT_NASCIMENTO")
+	@Column(name = "DT_NASCIMENTO")
 	private Calendar dataNascimento;
-	
-	@OneToOne(cascade=CascadeType.ALL)
+
+	@OneToOne(cascade = CascadeType.ALL)
 	private Endereco endereco;
-	
-	@ManyToMany(cascade=CascadeType.PERSIST)
+
+	@ManyToMany(cascade = CascadeType.PERSIST)
 	private List<Pacote> pacotes;
 
 	public Cliente(String nome, String cpf, Calendar dataNascimento, Endereco endereco, List<Pacote> pacotes) {
@@ -46,7 +54,7 @@ public class Cliente {
 		this.endereco = endereco;
 		this.pacotes = pacotes;
 	}
-	
+
 	public Cliente() {
 	}
 
@@ -93,6 +101,5 @@ public class Cliente {
 	public void setPacotes(List<Pacote> pacotes) {
 		this.pacotes = pacotes;
 	}
-	
-	
+
 }

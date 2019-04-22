@@ -80,4 +80,16 @@ class ClienteDAOTeste {
 		}
 	}
 
+	@Test
+	void contarPorEstado() {
+		long qtd = dao.contarPorEstado("SP");
+		assertEquals(1, qtd);
+	}
+
+	@Test
+	void pesquisarPorCpfTest() {
+		Cliente cliente = dao.pesquisarPorCpf("98728018736");
+		assertEquals("98728018736", cliente.getCpf());
+	}
+
 }

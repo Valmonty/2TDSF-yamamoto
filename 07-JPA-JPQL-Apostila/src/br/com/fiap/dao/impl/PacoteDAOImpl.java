@@ -27,4 +27,17 @@ public class PacoteDAOImpl extends GenericDAOImpl<Pacote, Integer> implements Pa
 				.setParameter("i", inicio).setParameter("f", fim).getResultList();
 	}
 
+	@Override
+	public double somarPrecoPorTransporte(Transporte transporte) {
+		return em.createQuery("select sum(p.preco) from Pacote p where p.transporte = :T", Double.class)
+				.setParameter("T", transporte).getSingleResult();
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Pacote> buscarPorPreco(double preco) {
+		return em.createNativeQuery("SELECT * FROM PACOTE WHERE PRECO < :P", Pacote.class).setParameter("P", preco)
+				.getResultList();
+	}
+
 }

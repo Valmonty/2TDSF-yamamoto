@@ -55,4 +55,19 @@ class PacoteDAOTeste {
 		}
 	}
 
+	@Test
+	void somarPrecoPorTransporteTeste() {
+		Transporte transporte = transporteDAO.pesquisar(1);
+		double total = pacoteDAO.somarPrecoPorTransporte(transporte);
+		assertEquals(4300, total);
+	}
+
+	@Test
+	void buscarPorPrecoTest() {
+		List<Pacote> lista = pacoteDAO.buscarPorPreco(1000);
+		for (Pacote pacote : lista) {
+			assertTrue(pacote.getPreco() < 1000);
+		}
+	}
+
 }

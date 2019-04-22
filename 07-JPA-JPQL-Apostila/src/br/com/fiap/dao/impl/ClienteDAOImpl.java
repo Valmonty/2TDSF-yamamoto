@@ -22,7 +22,7 @@ public class ClienteDAOImpl extends GenericDAOImpl<Cliente, Integer> implements 
 
 	@Override
 	public List<Cliente> pesquisar(String nome) {
-		return em.createQuery("from Cliente c where c.nome like :n", Cliente.class).setParameter("n", "%" + nome + "%")
+		return em.createNamedQuery("Cliente.porNome", Cliente.class).setParameter("n", "%" + nome.toUpperCase() + "%")
 				.getResultList();
 	}
 
@@ -48,6 +48,17 @@ public class ClienteDAOImpl extends GenericDAOImpl<Cliente, Integer> implements 
 	public List<Cliente> buscarPorEstados(List<String> estados) {
 		return em.createQuery("from Cliente c where c.endereco.cidade.uf in :e", Cliente.class)
 				.setParameter("e", estados).getResultList();
+	}
+
+	@Override
+	public long contarPorEstado(String estado) {
+		return em.createQuery("select count(c) from Cliente c where c.endereco.cidade.uf = :e", Long.class)
+				.setParameter("e", estado).getSingleResult();
+	}
+
+	@Override
+	public Cliente pesquisarPorCpf(String cpf) {
+		return em.createNamedQuery("Cliente.porCpf", Cliente.class).setParameter("c", cpf).getSingleResult();
 	}
 
 }
