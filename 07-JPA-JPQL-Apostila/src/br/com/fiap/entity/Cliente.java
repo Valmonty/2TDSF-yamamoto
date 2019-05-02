@@ -19,8 +19,8 @@ import javax.persistence.TemporalType;
 
 @NamedQueries({
 		@NamedQuery(name = "Cliente.porNome", query = "select c from Cliente c where upper(c.nome) like upper(:n) order by c.nome"),
-		@NamedQuery(name = "Cliente.porCpf", query = "select c from Cliente c where c.cpf = :c") 
-		
+		@NamedQuery(name = "Cliente.porCpf", query = "select c from Cliente c where c.cpf = :c")
+
 })
 
 @Entity
